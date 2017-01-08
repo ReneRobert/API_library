@@ -1,0 +1,157 @@
+---
+swagger: "2.0"
+info:
+  description: ""
+  version: "1.0"
+  title: "API MyLibrary"
+# host: "www.example.com"
+basePath: "/api/v1"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /book:
+    get:
+      tags:
+      - "book"
+      summary: "find"
+      description: ""
+      operationId: "controllers.default_controller.book_list"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Book"
+      x-tags:
+      - tag: "book"
+    post:
+      tags:
+      - "book"
+      summary: "create"
+      description: ""
+      operationId: "controllers.default_controller.book_create"
+      parameters:
+      - in: "body"
+        name: "book"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        201:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+      x-tags:
+      - tag: "book"
+  /book/{bookId}:
+    get:
+      tags:
+      - "book"
+      summary: "getById"
+      description: ""
+      operationId: "controllers.default_controller.bookfind_by_id"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+      x-tags:
+      - tag: "book"
+    put:
+      tags:
+      - "book"
+      summary: "update"
+      description: ""
+      operationId: "controllers.default_controller.book_update"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "book"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        201:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+      x-tags:
+      - tag: "book"
+    delete:
+      tags:
+      - "book"
+      summary: "delete"
+      description: ""
+      operationId: "controllers.default_controller.book_delete"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "Success"
+      x-tags:
+      - tag: "book"
+    patch:
+      tags:
+      - "book"
+      summary: "patch"
+      description: ""
+      operationId: "controllers.default_controller.book_patch"
+      parameters:
+      - name: "bookId"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "book"
+        required: true
+        schema:
+          $ref: "#/definitions/Book"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+      x-tags:
+      - tag: "book"
+definitions:
+  Book:
+    type: "object"
+    required:
+    - "author"
+    - "category"
+    - "id"
+    - "price"
+    - "title"
+    properties:
+      id:
+        type: "string"
+      author:
+        type: "string"
+      title:
+        type: "string"
+      comment:
+        type: "string"
+      price:
+        type: "integer"
+        format: "int32"
+      category:
+        type: "array"
+        items:
+          type: "string"
